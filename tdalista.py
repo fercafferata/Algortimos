@@ -179,3 +179,10 @@ def ord_alf(lista):
     for i in range(len(lista)-1):
         if lista[i+1] < lista[i]:
             ubicar(lista, i+1)'''
+
+
+def busquedaxcampo(l, buscado, campo):  # lista no ordenada por x campo buscado
+    aux = l.inicio
+    while (aux is not None) and (aux.info[campo] != buscado):
+        aux = aux.sig
+    return aux

@@ -1,7 +1,7 @@
 from tdalista import cargaAuto, insertar, eliminar, barrido
 from tdalista import lista_vacia, tamanio, Lista, eliminarNodo
 from tdalista import cargaString, insertar1, primo, busquedaLista
-from tdalista import campos
+from tdalista import campos, busquedaxcampo
 from tdalistaenlazada import insertar2, Lista2, barrido2, busquedacampos2
 from tdalistaenlazada import campos2, tamanio2
 import math
@@ -15,7 +15,7 @@ l3 = Lista()
 l4 = Lista()
 l5 = Lista()
 l6 = Lista()
-m
+
 
 '''cargaAuto(l1, 5)
 barrido(l1)
@@ -171,19 +171,24 @@ while not lista_vacia(l3):
 barrido(l1)'''
 
 
-# ej 9 TERMINAR PARTE B
-'''artistas = ["Arctic monkeys", "The strokes", "Miles Kane", "Oasis",
+# ej 9
+'''
+artistas = ["Arctic monkeys", "The strokes", "Miles Kane", "Oasis",
             "Radiohead", "The killers", "Coldplay", "Kings of leon",
             "The kooks", "Kasabian", "Josh Homme", "Foo fighters"]
-for i in range(0, 10):
+for i in range(0, 50):
     nom = 'Nombre: ' + str(random.randint(0, 50))
     artis = random.choice(artistas)
     dur = random.randint(60, 180)
     reprod = random.randint(200, 1000)
     cancion = [nom, artis, dur, reprod]
-    campos(l1, cancion, 1)
-barrido(l1)'''
-
+    campos(l1, cancion, 1) # por nombre
+    campos(l2, cancion, 3) # por reproducciones
+print('Ordenado por nombre')
+barrido(l1)
+print('Ordenado por reproducciones')
+barrido(l2)
+'''
 # Parte A
 '''aux = l1.inicio
 clarga = aux
@@ -193,10 +198,21 @@ while aux is not None:
     aux = aux.sig
 print('La cancion mas larga es ' + str(clarga.info))'''
 
-# Parte B mal
-# puedo ordenar de mayor a menor por reproducciones
-# y mostrar los primeros 5/10/50
-
+# Parte B
+'''
+top = 10
+cont = l2.tamanio - top
+if (cont >= 0):
+    aux = l2.inicio
+    for i in range(0, l2.tamanio - top):
+        aux = aux.sig
+    print('Top' + str(top))
+    while aux is not None:
+        print(aux.info)
+        aux = aux.sig
+else:
+    print("No es posible mostrar la lista pedida")
+'''
 # Parte C
 '''aux = l1.inicio
 while aux is not None:
@@ -327,12 +343,10 @@ while aux is not None:
 print('Aparece en los episodios:')
 barrido(l4)'''
 
-# ej12
-
-# ej13
 
 # ej14 FALTA PARTE D, H
-'''l1 = Lista2()
+'''
+l1 = Lista2()
 pokemons = ['Bulbasaur', 'Ivysaur', 'Charmander', 'Squirtle', 'Caterpie']
 tipos = ['fuego', 'agua', 'planta', 'bicho', 'volador', 'veneno', 'electrico']
 entrenadores = ['Pepito', 'Mariana', 'Pedro', 'Jose', 'Alicia', 'Luciano']
@@ -352,17 +366,19 @@ for i in range(0, 6):
         subtipo = random.choice(string.ascii_uppercase)
         pok = [nomb, nivel, tipo, subtipo]
         campos2(laux, pok, 0)
-barrido2(l1)'''
-
+barrido2(l1)
+'''
 # Parte A
 '''print('Cantidad de pokemons por jugador: ' + str(tamanio2(laux)))
 # Parte B
+
 print('Entrenadores con mas de 3 toneos ganados')
 aux = l1.inicio
 while aux is not None:
     if aux.info[1] > 3:
         print(aux.info)
-    aux = aux.sig'''
+    aux = aux.sig
+    '''
 # Parte C
 '''aux = l1.inicio
 e_mayor = aux.info[1]
@@ -478,13 +494,48 @@ while aux is not None:
         print(aux.info)
     aux = aux.sig'''
 
-# ej16
-destinos = ['Paris', 'Atenas', 'Roma', 'Filadelfia', 'Grecia', 'Londres']
-for i in range(0, 10):
-    empresa = random.choice(string.ascii_uppercase)
-    numero = random.randint(0, 50)
-    asientos = random.randint(0, 60)
-    #fecha =
-    origen = random.choice(string.ascii_lowercas)
-    destino = random.choice(destinos)
-    kilometros = random.randint(10, 1000)
+
+# Ej17
+prod = ['Pendrive', 'Mouse', 'Teclado inalambrico', 'Disco solido', 'Monitor']
+marc = ['Kingston', 'WD Blue', 'Genius', 'Dell']
+for i in range(0, 12):
+    codigo = random.randint(1111, 2222)
+    producto = random.choice(prod)
+    marca = random.choice(marc)
+    mod = 'MOD' + str(random.randint(15, 298))
+    precio = random.randint(400, 1000)
+    cantidad = random.randint(0, 10)
+    articulo = [codigo, producto, marca, mod, precio, cantidad]
+    campos(l1, articulo, 1)
+print('STOCK')
+barrido(l1)
+
+# Punto A
+
+# Punto B
+'''
+aux = l1.inicio
+while aux is not None:
+    if (aux.info[1] == 'Pendrive' and aux.info[2] == 'Kingston'):
+        eliminar(l1, aux.info)
+        print('Se han eliminado los articulos ingresados')
+    aux = aux.sig
+barrido(l1)
+'''
+
+# Punto D
+existencia = 0
+costo = 0
+aux = l1.inicio
+while aux is not None:
+    if (aux.info[1] == 'Disco solido'):
+        costo = aux.info[4] * aux.info[5]
+        existencia += costo
+    aux = aux.sig
+print(existencia)
+'''    
+aux1 = busquedaxcampo(l1, 'Teclado inalambrico', 1)
+if(aux is not None):
+    costo = aux1.info[4] * aux1.info[5]
+    print(str(costo) + ' Es el costo de existencia de Teclados inalambricos')
+    '''
