@@ -550,3 +550,53 @@ print(existencia)
 '''
 
 # Ej 18
+
+
+# Ej 20
+nom = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H']
+for i in range(0, 20):
+    nombre = random.choice(nom)
+    precio = random.randint(20, 50)
+    calif = random.randint(1, 5)
+    articulo = [nombre, precio, calif]
+    insertar(l1, articulo)
+    campos(l2, articulo, 2)
+print('ARTICULOS ORDENADOS POR NOMBRE')
+barrido(l1)
+
+# Punto A
+'''
+buscado = 'G'
+aux = l1.inicio
+print('Articulo buscado')
+while aux is not None:
+    if aux.info[0] == buscado:
+        print(aux.info)
+    aux = aux.sig
+'''
+
+# Punto B
+
+
+# Punto D
+'''
+aux = l1.inicio
+menor = aux.info[1]
+while aux is not None:
+    if aux.info[2] == 3:
+        if menor > aux.info[1]:
+            menor = aux.info[1]
+    aux = aux.sig
+print('Articulo mas barato con clasificacion 3')
+print(menor)
+'''
+
+# Punto E
+'''
+aux = l1.inicio
+print('Precio de los productos que empiezan con H')
+while aux is not None:
+    if aux.info[0] == 'H':
+        print(aux.info[1])
+    aux = aux.sig
+'''
