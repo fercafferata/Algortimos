@@ -10,7 +10,6 @@ class Lista2():
 
 
 class ListadeLista():
-
     def __init__(self):
         self.info = None
         self.sig = None
@@ -59,10 +58,13 @@ def busquedaLista2(lista, buscado):
     return aux
 
 
-def busquedacampos2(lista, buscado, campo):
+def busquedacampos2(lista, buscado, campo):  # Para manejo con array
+    '''Devuelve el puntero de elemento buscado por campo ingresado'''
     aux = lista.inicio
-    while aux is not None and aux.info[campo] != buscado:
+    while (aux is not None) and (aux.info[campo] < buscado):
         aux = aux.sig
+    if (aux is not None) and (aux.info[campo] != buscado):
+        aux = None
     return aux
 
 

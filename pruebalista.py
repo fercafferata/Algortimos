@@ -3,7 +3,7 @@ from tdalista import lista_vacia, tamanio, Lista, eliminarNodo
 from tdalista import cargaString, insertar1, primo, busquedaLista
 from tdalista import campos, busquedaxcampo
 from tdalistaenlazada import insertar2, Lista2, barrido2, busquedacampos2
-from tdalistaenlazada import campos2, tamanio2
+from tdalistaenlazada import campos2, tamanio2, busquedaLista2
 import math
 import string
 import random
@@ -344,43 +344,49 @@ print('Aparece en los episodios:')
 barrido(l4)'''
 
 
-# ej14 FALTA PARTE D, H
+# ej14 FALTA PARTE H
 '''
-l1 = Lista2()
-pokemons = ['Bulbasaur', 'Ivysaur', 'Charmander', 'Squirtle', 'Caterpie']
+laux = Lista()
 tipos = ['fuego', 'agua', 'planta', 'bicho', 'volador', 'veneno', 'electrico']
-entrenadores = ['Pepito', 'Mariana', 'Pedro', 'Jose', 'Alicia', 'Luciano']
-for i in range(0, 6):
-    nombre = entrenadores[i]
+for i in range(1, 9):
+    nombre = 'Entre' + str(i)
     t_ganados = random.randint(0, 10)
     b_perdidas = random.randint(0, 10)
     b_ganadas = random.randint(0, 10)
-    entr = [nombre, t_ganados, b_perdidas, b_ganadas]
-    campos2(l1, entr, 0)
-    nodo = busquedacampos2(l1, entr[0], 0)
-    laux = nodo.lista
     for j in range(0, 3):
-        nomb = random.choice(pokemons)
+        nomb = 'Pokemon ' + str(random.randint(0, 6))
         nivel = random.randint(1, 40)
         tipo = random.choice(tipos)
         subtipo = random.choice(string.ascii_uppercase)
         pok = [nomb, nivel, tipo, subtipo]
         campos2(laux, pok, 0)
+    entrenador = [nombre, t_ganados, b_perdidas, b_ganadas, laux]
+    campos2(l1, entrenador, 0)
 barrido2(l1)
 '''
 # Parte A
-'''print('Cantidad de pokemons por jugador: ' + str(tamanio2(laux)))
-# Parte B
+'''
+buscado = 'Entre1'
+laux = busquedaLista2(l1, buscado)
+if (laux is not None):
+    print("Pokemons de entrenador " + buscado)
+    barrido2(laux.info[4])
+else:
+    print("El entrenador buscado no está en la lista")
+'''
 
+# Parte B
+'''
 print('Entrenadores con mas de 3 toneos ganados')
 aux = l1.inicio
 while aux is not None:
     if aux.info[1] > 3:
         print(aux.info)
     aux = aux.sig
-    '''
+'''
 # Parte C
-'''aux = l1.inicio
+'''
+aux = l1.inicio
 e_mayor = aux.info[1]
 while aux is not None:
     if aux.info[1] > e_mayor:
@@ -389,17 +395,24 @@ while aux is not None:
         nod = aux
     aux = aux.sig
 print('El entrenador con mayores torneos ganados es: ' + str(nom[0]))
-d = nod.lista
-dat = d.inicio
-p_mayor = dat.info[1]
-while dat is not None:
-    if dat.info[1] > p_mayor:
-        p_mayor = dat.info[1]
-        nom1 = dat.info
-    dat = dat.sig
-print('y su pokemons de mayor nivel es ' + str(nom1))'''
+d = nod.info[4].inicio
+dat = d
+while d is not None:
+    if d.info[1] > dat.info[1]:
+        dat = d
+    d = d.sig
+print('y su pokemons de mayor nivel es: ' + str(dat.info))
+'''
 # Parte D
-
+'''
+aux = l1.inicio
+print('Entrenadores con mas del 79% de batallas ganadas')
+while aux is not None:
+    porc = 100*(aux.info[3]/(aux.info[3] + aux.info[2]))
+    if (porc > 79):
+        print(aux.info[0])
+    aux = aux.sig
+'''
 # Parte E
 '''dat = l1.inicio
 while dat is not None:
@@ -432,7 +445,6 @@ while aux is not None:
         print('El nivel de pokemons de ' + nombre + ' es ' + str(prom))
     aux = aux.sig'''
 # Parte G
-#print('Ingrese el nombre del pokemons')
 '''nom = 'Bulbasaur'
 aux = l1.inicio
 cont = 0
@@ -496,6 +508,7 @@ while aux is not None:
 
 
 # Ej17
+'''
 prod = ['Pendrive', 'Mouse', 'Teclado inalambrico', 'Disco solido', 'Monitor']
 marc = ['Kingston', 'WD Blue', 'Genius', 'Dell']
 for i in range(0, 12):
@@ -509,7 +522,7 @@ for i in range(0, 12):
     campos(l1, articulo, 1)
 print('STOCK')
 barrido(l1)
-
+'''
 # Punto A
 
 # Punto B
@@ -524,6 +537,7 @@ barrido(l1)
 '''
 
 # Punto D
+'''
 existencia = 0
 costo = 0
 aux = l1.inicio
@@ -533,9 +547,6 @@ while aux is not None:
         existencia += costo
     aux = aux.sig
 print(existencia)
-'''    
-aux1 = busquedaxcampo(l1, 'Teclado inalambrico', 1)
-if(aux is not None):
-    costo = aux1.info[4] * aux1.info[5]
-    print(str(costo) + ' Es el costo de existencia de Teclados inalambricos')
-    '''
+'''
+
+# Ej 18

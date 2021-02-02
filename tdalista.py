@@ -101,7 +101,7 @@ def eliminar(lista, clave):
 def barrido(lista):
     aux = lista.inicio
     while aux is not None:
-        print(aux.info)
+        print(str(aux.info))
         aux = aux.sig
 
 
