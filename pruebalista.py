@@ -83,7 +83,8 @@ barrido(l1)'''
 
 
 # ej6 PARTE D TERMINAR
-'''sheroes = ['Linterna Verde', 'Wolverine', 'Ant Man', 'Ironman', 'Black Panter']
+'''
+sheroes = ['Linterna Verde', 'Wolverine', 'Ant Man', 'Ironman', 'Black Panter']
 casas = ['Marvel', 'DC']
 for i in range(0, 10):
     nombre = random.choice(sheroes)
@@ -553,6 +554,7 @@ print(existencia)
 
 
 # Ej 20
+'''
 nom = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H']
 for i in range(0, 20):
     nombre = random.choice(nom)
@@ -563,7 +565,7 @@ for i in range(0, 20):
     campos(l2, articulo, 2)
 print('ARTICULOS ORDENADOS POR NOMBRE')
 barrido(l1)
-
+'''
 # Punto A
 '''
 buscado = 'G'
@@ -576,8 +578,21 @@ while aux is not None:
 '''
 
 # Punto B
-
-
+'''
+print('Presione la tecla de acuerdo a la opción que desee')
+print('1- Articulos ordenados por nombre')
+print('2- Articulos ordenados por calificacion')
+opcion = input()
+print(opcion)
+if opcion == '1':
+    print('Articulos ordenados por nombre')
+    barrido(l1)
+    if opcion == '2':
+        print('Articulos ordenados por calificacion')
+        barrido(l2)
+else:
+    print('Presione la tecla que corresponda')
+'''
 # Punto D
 '''
 aux = l1.inicio

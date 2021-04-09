@@ -186,3 +186,33 @@ def busquedaxcampo(l, buscado, campo):  # lista no ordenada por x campo buscado
     while (aux is not None) and (aux.info[campo] != buscado):
         aux = aux.sig
     return aux
+
+
+def busquedalistaxcampo(l, buscado, campo):
+    aux = l.inicio
+    while aux is not None and aux.info[campo] < buscado:
+        aux = aux.sig
+    if aux is not None and aux.info[campo] != buscado:
+        aux = None
+    return aux
+
+
+def eliminarCampo(l, dato, campo):  # Para manejo con array
+
+    if (l.inicio.info[campo] == dato):
+        while l.inicio.info[campo] == dato:
+            l.inicio = l.inicio.sig
+            l.tamanio -= 1
+    else:
+        ant = l.inicio
+        act = ant.sig
+
+        while (act is not None) and (act.info[campo] < dato):
+            act = act.sig
+            ant = ant.sig
+
+        if (act is not None) and (act.info[campo] == dato):
+            while act.info[0] == dato:
+                ant.sig = act.sig
+                act = ant.sig
+                l.tamanio -= 1
