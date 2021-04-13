@@ -3,11 +3,12 @@ import random
 r = None
 
 # ej1
-for i in range(0, 1000):
+'''for i in range(0, 1000):
     r = insertar(r, random.randint(0, 2000))
 # Parte A
 print('Barrido preorden:')
 preorden(r)
+'''
 '''print('Barrido inorden:')
 inorden(r)
 print('Barrido postorden:')
@@ -445,6 +446,120 @@ viento = random.randint(0, 100)
 
 tiempo_meteorologico(r, temperatura, presion, humedad, visibilidad, viento)'''
 
+
+# Ej 21
+# criatura 0, vencedor 1, descripcion 2
+'''tabla = [
+            ['Ceto', '', ''],
+            ['Tifon', 'Zeus', ''],
+            ['Equidna', 'Argos Panoptes'],
+            ['Dino', '', ''],
+            ['Pefredo', '', ''],
+            ['Enio', '', ''],
+            ['Escila', '', ''],
+            ['Caribdis', '', ''],
+            ['Euriale', '', ''],
+            ['Esteno', '', ''],
+            ['Medusa', 'Perseo', ''],
+            ['Cerda de cromion', 'Teseo', ''],
+            ['Ortro', 'Heracles', ''],
+            ['Toro de creta', 'Teseo', ''],
+            ['Jabali de calidon', 'Atalanta', ''],
+            ['Carcinos', '', ''],
+            ['Gerion', 'Heracles', ''],
+            ['Cloto', '', ''],
+            ['Laquesis', '', ''],
+            ['Atropos', '', ''],
+            ['Minotauro de creta', 'Teseo', ''],
+            ['Harpias', '', ''],
+            ['Ladon', 'Heracles', ''],
+            ['Aguila del Caucaso', '', ''],
+            ['Quimera', 'Belerofonte', ''],
+            ['Hidra de Lerna', 'Heracles', ''],
+            ['Leon de Nemea', 'Heracles', ''],
+            ['Esfinge', 'Edipo', ''],
+            ['Dragon de la Colquida', '', ''],
+            ['Cerbero', '', ''],
+            ['Argos Panoptes', 'Hermes', ''],
+            ['Aves del Estínfalo', '', ''],
+            ['Talos', 'Medea', ''],
+            ['Sirenas', '', ''],
+            ['Piton', 'Apolo', ''],
+            ['Cierva de Cerinea', '', ''],
+            ['Basilisco', '', ''],
+            ['Jabalí de Erimanto', '', '']
+]
+
+for i in tabla:
+    r = insertar(r, i)
+print('Barrido inorden: ')
+inorden(r)
+'''
+# punto b
+'''print('Cargar descripcion')
+bus = busquedaCampo(r, 'Enio')
+print('Criatura: ', bus.info[0])
+print('Descripción: ', bus.info[2])
+
+cargar_descripcion(r, 'Enio', 'Descripcion')
+print('Criatura: ', bus.info[0])
+print('Descripción: ', bus.info[2])
+'''
+
+# punto C
+'''busc = busquedaCampo(r, 'Talos')
+print('Criatura: ', busc.info[0])
+print('Derrotado por: ', busc.info[1])
+print('Descripcion: ', busc.info[2])'''
+
+# punto D
+'''venc = []
+venc = vencedores(r, venc)
+venc_aux = []
+for item in venc:
+    if item not in venc_aux:
+        venc_aux.append(item)
+for i in range(0, len(venc_aux)):
+    aux = venc.count(venc_aux[i])
+    venc_aux[i] = str(aux)+venc_aux[i]
+venc_aux.sort(reverse=True)
+print('Los 3 mas vencedores')
+for i in range(0, 3):
+    print(venc_aux[i][1:])
+'''
+
+# punto E
+'''vencidos = []
+vencidos = derrotadoPor(r, 'Heracles', vencidos)
+print('Criaturas derrotadas por Heracles')
+print(vencidos)'''
+
+
+# punto F
+'''noderrotados = []
+noderrotados = derrotadoPor(r, '')
+print('Criaturas no derrotadas')
+print(noderrotados)
+'''
+
+# punto H
+'''print('Sin las criaturas eliminadas')
+print(inorden(r))
+eliminar, clave = eliminarCampo(r, 'Basilisco')
+eliminar, clave = eliminarCampo(r, 'Sirenas')
+print('Con las criaturas eliminadas')
+print(inorden(r))'''
+
+# punto I
+'''buscado = busquedaCampo(r, 'Aves del Estínfalo')
+buscado.info[1] = 'Heracles'
+buscado.info[2] = 'Derroto a varias aves'
+inorden(r)'''
+
+# punto J
+'''buscado = busquedaCampo(r, 'Ladon')
+buscado.info[0] = 'Dragon ladon'
+inorden(r)'''
 
 
 # ej 22

@@ -148,6 +148,19 @@ def busquedaProxCampo(raiz, buscado, campo):
     return aux
 
 
+def busquedaCampo(raiz, buscado, campo=0):
+    pos = None
+    if raiz is not None:
+        if raiz.info[campo] == buscado:
+            pos = raiz
+        else:
+            if buscado < raiz.info[campo]:
+                pos = busquedaCampo(raiz.izq, buscado)
+            else:
+                pos = busquedaCampo(raiz.der, buscado)
+    return pos
+
+
 def preorden(raiz):
     if raiz is not None:
         print(raiz.info)
@@ -180,24 +193,42 @@ def reemplazar(raiz):
 
 def eliminar(raiz, clave):
     x = None
-    if (raiz is not None):
-        if (raiz.info > clave):
+    if raiz is not None:
+        if clave < raiz.info:
             raiz.izq, x = eliminar(raiz.izq, clave)
+        elif clave > raiz.info:
+            raiz.der, x = eliminar(raiz.der, clave)
         else:
-            if(raiz.info < clave):
-                raiz.der, x = eliminar(raiz.der, clave)
+            x = raiz.info
+            if raiz.izq is None:
+                raiz = raiz.der
+            elif raiz.der is None:
+                x = raiz.info
+                raiz = raiz.izq
             else:
-                if (raiz.izq is None):
-                    x = raiz.info
-                    raiz = raiz.der
-                else:
-                    if(raiz.der is None):
-                        x = raiz.info
-                        raiz = raiz.izq
-                    else:
-                        raiz.izq, aux = reemplazar(raiz.izq)
-                        raiz.info = aux.info
-    return(raiz, x)
+                raiz.izq, aux = reemplazar(raiz.izq)
+                raiz.info = aux.info
+    return raiz, x
+
+
+def eliminarCampo(raiz, clave, campo=0):
+    x = None
+    if raiz is not None:
+        if clave < raiz.info[campo]:
+            raiz.izq, x = eliminarCampo(raiz.izq, clave)
+        elif clave > raiz.info[campo]:
+            raiz.der, x = eliminarCampo(raiz.der, clave)
+        else:
+            x = raiz.info[campo]
+            if raiz.izq is None:
+                raiz = raiz.der
+            elif raiz.der is None:
+                x = raiz.info[campo]
+                raiz = raiz.izq
+            else:
+                raiz.izq, aux = reemplazar(raiz.izq)
+                raiz.info[campo] = aux.info[campo]
+    return raiz, x
 
 
 def hoja(raiz):
@@ -545,3 +576,29 @@ def tiempo_meteorologico(arbol, temperatura, presion, humedad, visibilidad, vien
             else:
                 pronostico = arbol.der.info
                 print('Pronostico: ', pronostico)
+
+
+def cargar_descripcion(raiz, criatura, descripcion):
+    buscado = busquedaCampo(raiz, criatura, campo=0)
+    if buscado:
+        buscado.info[2] = descripcion
+    else:
+        print('No se pudo encontrar la criatura')
+
+
+def vencedores(raiz, venc=[]):
+    if raiz is not None:
+        venc = vencedores(raiz.izq, venc=venc)
+        if raiz.info[1] != '':
+            venc.append(raiz.info[1])
+        venc = vencedores(raiz.der, venc=venc)
+    return venc
+
+
+def derrotadoPor(raiz, vencedor, derrotados=[]):
+    if raiz is not None:
+        derrotados = derrotadoPor(raiz.izq, vencedor, derrotados=derrotados)
+        if raiz.info[1] == vencedor:
+            derrotados.append(raiz.info[0])
+        derrotados = derrotadoPor(raiz.der, vencedor, derrotados=derrotados)
+    return derrotados
