@@ -18,7 +18,6 @@ class Arista():
 
 
 class lista_arista():
-    '''lista de lista, crea lista vacia'''
     def __init__(self, dirigido=True):
         self.inicio = None
         self.tamanio = 0
@@ -54,8 +53,8 @@ def insertar_vertice(grafo, dato):
         ant.sig = nodo
     grafo.tamanio += 1
 
-
-def agregar_arista():
+'''
+def agregar_arista():'''
 
 
 def insertar_arista(grafo, dato, origen, destino):
@@ -117,13 +116,19 @@ def barrido_amplitud(grafo, vertice):
     vertice = vertice.sig
 
 # terminar
-def existe_paso():
-    resultado = true
-    if not origen.visitado:
-        origen.visitado = true
-        vadyacente = origen.adyacente.inicio
-        while vadyacente is not none and not resultado:
-            adyacente = buscar_vertice(grafo, vadyacente.origen)
+def existePaso(grafo, origen, destino):
+    resultado = False
+    if(not origen.visitado):
+        origen.visitado = True
+        vadyacentes = origen.adyacentes.inicio
+        while(vadyacentes is not None) and (not resultado):
+            adyacente = buscarVertice(grafo, vadyacentes.destino)
+            if(adyacente.info == destino.info):
+                return True
+            elif(not adyacente.visitado):
+                resultado = existePaso(grafo, adyacente, destino)
+            vadyacentes = vadyacentes.sig
+    return resultado
 
 
 def marcar_no_visitado(grafo):
@@ -133,8 +138,7 @@ def marcar_no_visitado(grafo):
     aux = aux.sig
 
 
-def camino_corto()
-
+'''def camino_corto()'''
 
 def eliminar_vertice(grafo, clave):
     dato = None

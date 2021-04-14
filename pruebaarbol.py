@@ -213,7 +213,6 @@ r.izq.der = NodoArbol(4)
 r.der.izq = NodoArbol(9)
 r.der.der = NodoArbol(2)
 inorden(r)
-imprimirArbol(r)
 nivel = 1
 print('En el nivel ', nivel, ' hay ', nodosxnivel(r, nivel), ' tendría que haber ', nodostotalXnivel(nivel), ' nodos')
 '''
