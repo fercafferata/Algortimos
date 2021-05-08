@@ -2,13 +2,14 @@ import random
 max = 20
 
 
-class Pila():
+class NodoPila():
+    info, sig = None, None
 
+
+class Pila():
     def __init__(self):
-        self.tope = -1
-        self.datos = []
-        for i in range(0, max):
-            self.datos.append(None)
+        self.tope = None
+        self.tamanio = 0
 
 
 def cargautomatica(pila):
@@ -18,26 +19,29 @@ def cargautomatica(pila):
 
 
 def apilar(pila, dato):
-    pila.tope += 1
-    pila.datos[pila.tope] = dato
+    nuevo = NodoPila()
+    nuevo.info = dato
+    nuevo.sig = pila.tope
+    pila.tope = nuevo
+    pila.tamanio += 1
 
 
 def desapilar(pila):
-    dato = pila.datos[pila.tope]
-    pila.tope -= 1
+    dato = pila.tope.info
+    pila.tope = pila.tope.sig
+    pila.tamanio -= 1
     return dato
-
 
 def pila_llena(pila):
     return pila.tope + 1 == max
 
 
 def pila_vacia(pila):
-    return pila.tope == -1
+    return (tamanio(pila) == 0)
 
 
 def tamanio(pila):
-    return pila.tope + 1
+    return pila.tamanio
 
 
 def cima(pila):
@@ -168,3 +172,17 @@ def ordendec(pila):
         for i in range(0, cont):
             apilar(aux, desapilar(pila))
     return aux
+
+
+def copiar_pila(pila):
+    paux = Pila()
+    pila2 = Pila()
+    
+    while not pila_vacia(pila):
+        dato = desapilar(pila)
+        apilar(paux, dato)
+    while not pila_vacia(paux):
+        dato = desapilar(paux)
+        apilar(pila, dato)
+        apilar(pila2, dato)
+    return pila2

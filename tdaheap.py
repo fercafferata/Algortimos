@@ -4,15 +4,16 @@ class heap():
         self.vector = [None]*tamanio
 
 
-def intercambio(a, b):
-    a, b = b, a
+def intercambio(vector, indice1, indice2):
+    vector[indice1], vector[indice2] = vector[indice2], vector[indice1]
 
 
 def flotar(H, indice):
-    padre = (indice-1)//2
-    while ((padre >= 0) and (H.vector[padre] < H.vector[indice])):
-        intercambio((H.vector[padre]), (H.vector[indice]))
-        padre = ((padre-1)//2)
+    padre = (indice - 1) // 2
+    while (indice > 0) and (H.vector[indice][0] < H.vector[padre][0]):
+        intercambio(H.vector, indice, padre)
+        indice = padre
+        padre = (indice - 1) // 2
 
 
 def agregar(H, dato):
@@ -22,25 +23,27 @@ def agregar(H, dato):
 
 
 def hundir(H, indice):
-    HI = (indice*2)+1
+    hijo_izq = (indice * 2) + 1
     control = True
-    while (control and HI < H.tamanio-1):
-        MAY = HI
-        HD = HI+1
-        if (HI <= H.tamanio-1) and (H.vector[HD] > H.vector[HI]):
-            MAY = HD
-        if (H.vector[indice] < H.vector[MAY]):
-            intercambio((H.vector[indice]), (H.vetor[MAY]))
+    while (control and hijo_izq < H.tamanio-1):
+        menor = hijo_izq
+        hijo_der = hijo_izq + 1
+        if (hijo_izq <= H.tamanio-1) and (H.vector[hijo_der][0] < H.vector[hijo_izq][0]):
+            mayor = hijo_der
+        if (H.vector[indice][0] > H.vector[menor][0]):
+            intercambio(H.vector, indice, menor)
+            indice = menor
+            hijo_izq = (2 * indice) + 1
         else:
             control = False
-            HI = (2*MAY)+1
 
 
 def quitar(H):
-    intercambio((H.vector[0]), (H.vector[H.tamanio-1]))
+    aux = H.vector[0]
+    intercambio(H.vector, 0, H.tamanio-1)
     H.tamanio -= 1
     hundir(H, 0)
-    return(H.vector[H.tamanio+1])
+    return aux
 
 
 # cola de proridad
@@ -48,7 +51,7 @@ def arribo_H(H, prioridad, dato):
     agregar(H, [prioridad, dato])
 
 
-def atencio_H(H):
+def atencion_H(H):
     aux = quitar(H)
     return(aux)
 
@@ -58,3 +61,23 @@ def Heapsort(H):
     for i in H.tamanio-2:
         quitar(H)
         H.tamanio = aux
+
+
+def heap_vacio(heap):
+    return heap.tamanio == 0
+
+
+def cambiarPrioridad(H, indice, prioridad):
+    prioridad_anterior = H.vector[indice][0]
+    H.vector[indice][0] = prioridad
+    if(prioridad < prioridad_anterior):
+        flotar(H, indice)
+    elif(prioridad > prioridad_anterior):
+        hundir(H, indice)
+
+
+def buscar_H(H, buscado):
+    for i in range(len(H.vector)):
+        if H.vector[i][1][0].info == buscado:
+            return i
+    return -1
